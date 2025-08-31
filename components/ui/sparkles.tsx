@@ -19,7 +19,6 @@ interface SparklesProps {
   mousemove?: boolean;
   hover?: boolean;
   background?: string;
-  options?: Record<string, any>; // Adjust type as needed based on `options` structure
 }
 
 export function Sparkles({
@@ -37,7 +36,6 @@ export function Sparkles({
   mousemove = false,
   hover = false,
   background = 'transparent',
-  options = {},
 }: SparklesProps) {
   const [isReady, setIsReady] = useState(false);
 
@@ -77,7 +75,7 @@ export function Sparkles({
             smooth: 10,
           },
         },
-        resize: true as any,
+        resize: true,
       },
       modes: {
         push: {
@@ -147,8 +145,8 @@ export function Sparkles({
   };
   return (
     isReady && (
-      <Particles id={id} 
-      // @ts-nocheck
+      <Particles id={id}
+      // @ts-expect-error - Particles options type mismatch with tsparticles library
       options={defaultOptions} className={className} />
     )
   );
